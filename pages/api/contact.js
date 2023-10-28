@@ -14,7 +14,7 @@ export default async function ContactAPI(req, res){
     curso,
   };
   
-const PWDR = process.env.PWD
+const pwdr = process.env.PWDR;
 
 
   const transport = nodemailer.createTransport({
@@ -24,7 +24,7 @@ const PWDR = process.env.PWD
     secure: false,
     auth: {
       user: "saga@sagapc.com.br",
-      pass: PWDR,
+      pass: (`${pwdr}`),
     },
   });
     
