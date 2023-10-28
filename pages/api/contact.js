@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer";
 
-import 'dotenv/config'
-require('dotenv').config()
+
 
 export default async function ContactAPI(req, res){
   const { nome, fone, email, cpf, curso } = req.body;
@@ -13,8 +12,9 @@ export default async function ContactAPI(req, res){
     cpf,
     curso,
   };
-  
-const pwdr = process.env.PWDR;
+
+  pwdr(process.env.NEXT_PUBLIC_PASSWORD)
+
 
 
   const transport = nodemailer.createTransport({
@@ -24,7 +24,7 @@ const pwdr = process.env.PWDR;
     secure: false,
     auth: {
       user: "saga@sagapc.com.br",
-      pass: (`${pwdr}`),
+      pass: pwdr,
     },
   });
     
