@@ -13,18 +13,19 @@ export default async function ContactAPI(req, res){
     curso,
   };
 
-  pwdr(process.env.NEXT_PUBLIC_PASSWORD)
+ 
 
+  const PASSWORD = process.env.PASSWORD;
 
 
   const transport = nodemailer.createTransport({
-    
+  
     host: "smtp.kinghost.net",
     port: 587,
     secure: false,
     auth: {
       user: "saga@sagapc.com.br",
-      pass: pwdr,
+      pass: PASSWORD,
     },
   });
     
