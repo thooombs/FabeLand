@@ -1,5 +1,8 @@
 import nodemailer from "nodemailer";
 
+import 'dotenv/config'
+require('dotenv').config()
+
 export default async function ContactAPI(req, res){
   const { nome, fone, email, cpf, curso } = req.body;
 
@@ -15,6 +18,7 @@ const PWDR = process.env.PWD
 
 
   const transport = nodemailer.createTransport({
+    
     host: "smtp.kinghost.net",
     port: 587,
     secure: false,
