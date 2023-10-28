@@ -20,7 +20,7 @@ export default function Home() {
       curso: String(event.target.curso.value),
     };
 
-    const response = await fetch("/api/contact", {
+    const response = await fetch("/api/route", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
