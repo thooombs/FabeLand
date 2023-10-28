@@ -18,7 +18,7 @@ export default async function ContactAPI(req, res){
     secure: false,
     auth: {
       user: "saga@sagapc.com.br",
-      pass: PASSWORD,
+      pass: process.env.PASSWORD,
     },
   });
     
