@@ -11,7 +11,6 @@ export default async function ContactAPI(req, res){
     curso,
   };
   
-  const PWD = PASSWORD
 
   const transport = nodemailer.createTransport({
     host: "smtp.kinghost.net",
@@ -19,7 +18,7 @@ export default async function ContactAPI(req, res){
     secure: false,
     auth: {
       user: "saga@sagapc.com.br",
-      pass: PWD,
+      pass: PASSWORD,
     },
   });
     
