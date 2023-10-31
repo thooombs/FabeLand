@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 
 
 export default async function ContactAPI(req, res){
+  const PASSWORD = process.env.PASSWORD;
   const { nome, fone, email, cpf, curso } = req.body;
 
   const data = {
@@ -15,7 +16,7 @@ export default async function ContactAPI(req, res){
 
  
 
-  const PASSWORD = process.env.PASSWORD;
+
 
 
   const transport = nodemailer.createTransport({
