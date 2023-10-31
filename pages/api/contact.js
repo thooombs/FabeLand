@@ -33,7 +33,7 @@ export default async function ContactAPI(req, res){
     
   
   
-  new Promise((resolve, reject) => {
+  await new Promise((resolve, reject) => {
     // verify connection configuration
     transporter.verify(function (error, success) {
         if (error) {
