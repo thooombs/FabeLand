@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 
 export default async function ContactAPI(req, res){
-  const PASSWORD = process.env.PASSWORD;
+ 
   const { nome, fone, email, cpf, curso } = req.body;
 
   const data = {
@@ -26,7 +26,7 @@ export default async function ContactAPI(req, res){
     secure: false,
     auth: {
       user: "saga@sagapc.com.br",
-      pass: PASSWORD,
+      pass: process.env.PASSWORD,
     },
   });
     
