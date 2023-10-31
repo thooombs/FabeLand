@@ -18,7 +18,7 @@ export default async function ContactAPI(req, res){
   
   const PASSWORD = process.env.NEXT_EMAIL_PASSWORD;
 
-
+  console.log("password" (PASSWORD));
 
   const transporter  = nodemailer.createTransport({
    
@@ -31,7 +31,7 @@ export default async function ContactAPI(req, res){
     },
   });
     
-  
+  console.log("NEXT_EMAIL_PASSWORD" (PASSWORD));
   
   await new Promise((resolve, reject) => {
     // verify connection configuration
