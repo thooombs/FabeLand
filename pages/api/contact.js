@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 
 export default async function ContactAPI(req, res){
- 
+
   const { nome, fone, email, cpf, curso } = req.body;
 
   const data = {
@@ -14,27 +14,40 @@ export default async function ContactAPI(req, res){
     curso,
   };
 
- 
+
+  
+  const PASSWORD = process.env.NEXT_EMAIL_PASSWORD;
 
 
 
-  const transport = nodemailer.createTransport({
+  const transporter  = nodemailer.createTransport({
    
     host: "smtp.kinghost.net",
     port: 587,
     secure: false,
     auth: {
       user: "saga@sagapc.com.br",
-      pass: process.env.NEXT_EMAIL_PASSWORD,
+      pass: PASSWORD,
     },
   });
     
-
+  
+  
+  new Promise((resolve, reject) => {
+    // verify connection configuration
+    transporter.verify(function (error, success) {
+        if (error) {
+            console.log(error);
+            reject(error);
+        } else {
+            console.log("Server is ready to take our messages");
+            resolve(success);
+        }
+    });
+});
    
   
-
-  try {
-const mail = await transport.sendMail({
+const mailData  = await transport.sendMail({
         from: "saga@sagapc.com.br",
         to: "thomaz639@gmail.com",
         subject: "Inscrição Vestibular FABE 2024",
@@ -49,11 +62,18 @@ const mail = await transport.sendMail({
       });
 
 
-    return res.status(200).json({ message: "success" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "could not send the email" 
-});
-  }
-
-}
+      await new Promise((resolve, reject) => {
+        // send mail
+        transporter.sendMail(mailData, (err, info) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                console.log(info);
+                resolve(info);
+            }
+        });
+    });
+    
+    res.status(200).json({ status: "OK" });
+    };
