@@ -18,7 +18,6 @@ export default async function ContactAPI(req, res){
   
   const PASSWORD = process.env.NEXT_EMAIL_PASSWORD;
 
-  console.log("password" (PASSWORD));
 
   const transporter  = nodemailer.createTransport({
    
@@ -31,7 +30,6 @@ export default async function ContactAPI(req, res){
     },
   });
     
-  console.log("NEXT_EMAIL_PASSWORD" (PASSWORD));
   
   await new Promise((resolve, reject) => {
     // verify connection configuration
@@ -46,8 +44,10 @@ export default async function ContactAPI(req, res){
     });
 });
    
-  
-const mailData  = await transport.sendMail({
+
+
+try {
+const mailData  = transporter.sendMail({
         from: "saga@sagapc.com.br",
         to: "thomaz639@gmail.com",
         subject: "Inscrição Vestibular FABE 2024",
@@ -60,20 +60,12 @@ const mailData  = await transport.sendMail({
   
         `,
       });
-
-
-      await new Promise((resolve, reject) => {
-        // send mail
-        transporter.sendMail(mailData, (err, info) => {
-            if (err) {
-                console.error(err);
-                reject(err);
-            } else {
-                console.log(info);
-                resolve(info);
-            }
-        });
-    });
     
-    res.status(200).json({ status: "OK" });
-    };
+
+    console.log('Message sent: %s', info.messageId);
+    res.status(200).json({ message: 'Email sent successfully!' });
+  } catch (error) {
+    console.error('Error occurred while sending email: ', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
