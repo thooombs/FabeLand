@@ -2,7 +2,13 @@ import nodemailer from "nodemailer";
 import { Resend } from 'resend';
 
 
-export default async function ContactAPI(req, res){
+import { NextResponse } from 'next/server';
+
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+
+
+export default async function ContactAPI() {
 
   const resend = new Resend('re_5hqut7DW_Myci3pCv4hFBSXqUvnGxkx3M');
 
@@ -17,26 +23,36 @@ export default async function ContactAPI(req, res){
   };
 
 
-try {
-  resend.emails.send({
-    from: 'onboarding@resend.dev',
-    to: 'thomaz639@gmail.com',
-    subject: 'Inscrição Vestibular FABE 2024',
-    html: `
-        <p>Nome: ${nome} </p>
-        <p>Fone: ${fone} </p>
-        <p>Email: ${email} </p>
-        <p>Cpf: ${cpf} </p>
-        <p>Curso: ${curso} </p>
-  
-        `,
-  });
-    
 
-    console.log('Message sent: %s', info.messageId);
-    res.status(200).json({ message: 'Email sent successfully!' });
-  } catch (error) {
-    console.error('Error occurred while sending email: ', error);
-    res.status(500).json({ error: 'Internal server error' });
+
+
+const RESEND_API_KEY = 're_123456789';
+
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${RESEND_API_KEY}`,
+    },
+    body: JSON.stringify({ 
+
+      from: 'onboarding@resend.dev',
+      to: 'thomaz639@gmail.com',
+      subject: 'Inscrição Vestibular FABE 2024',
+      html: `
+          <p>Nome: ${nome} </p>
+          <p>Fone: ${fone} </p>
+          <p>Email: ${email} </p>
+          <p>Cpf: ${cpf} </p>
+          <p>Curso: ${curso} </p>
+    
+          `
+    }),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    return NextResponse.json(data);
   }
 }
