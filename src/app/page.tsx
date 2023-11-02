@@ -13,7 +13,7 @@ export default function Home() {
     setLoading(true);
 
     const data = {
-      name: String(event.target.name.value),
+      nome: String(event.target.nome.value),
       fone: String(event.target.fone.value),
       email: String(event.target.email.value),
       cpf: String(event.target.cpf.value),
@@ -207,7 +207,7 @@ export default function Home() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="w-full flex flex-col my-4">
-              <label className="font-bold text-gray-800" htmlFor="name">
+              <label className="font-bold text-gray-800" htmlFor="nome">
                 Nome
               </label>
               <input
@@ -217,7 +217,7 @@ export default function Home() {
                 required
                 className=" p-4 bg-gray-50 border border-gray-100 "
                 autoComplete="off"
-                id="name"
+                id="nome"
               />
             </div>
             <div className="w-full flex flex-col my-4">

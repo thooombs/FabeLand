@@ -1,8 +1,10 @@
 import nodemailer from "nodemailer";
-
+import { Resend } from 'resend';
 
 
 export default async function ContactAPI(req, res){
+
+  const resend = new Resend('re_5hqut7DW_Myci3pCv4hFBSXqUvnGxkx3M');
 
   const { nome, fone, email, cpf, curso } = req.body;
 
@@ -15,42 +17,12 @@ export default async function ContactAPI(req, res){
   };
 
 
-  
-
-
-  const transporter  = nodemailer.createTransport({
-   
-    host: "smtp.kinghost.net",
-    port: 587,
-    secure: false,
-    auth: JSON.stringify({
-      user: "saga@sagapc.com.br",
-      pass: process.env.NEXT_EMAIL_PASSWORD,
-    }),
-  });
-    
-  
-  await new Promise((resolve, reject) => {
-    // verify connection configuration
-    transporter.verify(function (error, success) {
-        if (error) {
-            console.log(error);
-            reject(error);
-        } else {
-            console.log("Server is ready to take our messages");
-            resolve(success);
-        }
-    });
-});
-   
-
-
 try {
-const mailData  = transporter.sendMail({
-        from: "saga@sagapc.com.br",
-        to: "thomaz639@gmail.com",
-        subject: "Inscrição Vestibular FABE 2024",
-        html: `
+  resend.emails.send({
+    from: 'onboarding@resend.dev',
+    to: 'thomaz639@gmail.com',
+    subject: 'Inscrição Vestibular FABE 2024',
+    html: `
         <p>Nome: ${nome} </p>
         <p>Fone: ${fone} </p>
         <p>Email: ${email} </p>
@@ -58,7 +30,7 @@ const mailData  = transporter.sendMail({
         <p>Curso: ${curso} </p>
   
         `,
-      });
+  });
     
 
     console.log('Message sent: %s', info.messageId);
