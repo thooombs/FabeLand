@@ -16,7 +16,6 @@ export default async function ContactAPI(req, res){
 
 
   
-  const PASSWORD = process.env.NEXT_EMAIL_PASSWORD;
 
 
   const transporter  = nodemailer.createTransport({
@@ -26,7 +25,7 @@ export default async function ContactAPI(req, res){
     secure: false,
     auth: {
       user: "saga@sagapc.com.br",
-      pass: PASSWORD,
+      pass: process.env.NEXT_EMAIL_PASSWORD,
     },
   });
     
