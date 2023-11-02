@@ -26,7 +26,7 @@ export default async function ContactAPI() {
 
 
 
-const RESEND_API_KEY = 're_123456789';
+const RESEND_API_KEY = 're_5hqut7DW_Myci3pCv4hFBSXqUvnGxkx3M';
 
 
   const res = await fetch('https://api.resend.com/emails', {
