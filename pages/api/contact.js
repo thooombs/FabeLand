@@ -23,10 +23,10 @@ export default async function ContactAPI(req, res){
     host: "smtp.kinghost.net",
     port: 587,
     secure: false,
-    auth: {
+    auth: JSON.stringify({
       user: "saga@sagapc.com.br",
       pass: process.env.NEXT_EMAIL_PASSWORD,
-    },
+    }),
   });
     
   
