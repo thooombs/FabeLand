@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       from: 'FABE LP <onboarding@resend.dev>',
       to: "thomaz639@gmail.com",
       subject: `${req.body.nome} - Nova Inscrição FABE`,
-      html: `${req.body.nome} </br> ${req.body.fone} </br>  ${req.body.email} </br>  ${req.body.cpf} </br> ${req.body.curso}`,
+      html: `${req.body.nome} <br/> ${req.body.fone} <br/>  ${req.body.email} <br/>  ${req.body.cpf} <br/> ${req.body.curso}`,
     })
 
     res.status(200).json(data);
