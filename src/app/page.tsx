@@ -7,6 +7,11 @@ import { useState } from "react";
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [nome, setNome] = useState("");
+  const [fone, setFone] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [curso, setCurso] = useState("");
 
   async function handleSubmit(event: any) {
     event.preventDefault();
@@ -218,6 +223,10 @@ export default function Home() {
                 className=" p-4 bg-gray-50 border border-gray-100 "
                 autoComplete="off"
                 id="nome"
+                value={nome}
+                onChange={(e) => {
+                  setNome(e.target.value);
+                }}
               />
             </div>
             <div className="w-full flex flex-col my-4">
@@ -232,6 +241,10 @@ export default function Home() {
                 className=" p-4 bg-gray-50 border border-gray-100 "
                 autoComplete="off"
                 id="fone"
+                value={fone}
+                onChange={(e) => {
+                  setFone(e.target.value);
+                }}
               />
             </div>
 
@@ -246,6 +259,10 @@ export default function Home() {
                 className=" p-4 bg-gray-50 border border-gray-100 "
                 autoComplete="off"
                 id="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
             </div>
             <div className="w-full flex flex-col my-4">
@@ -260,6 +277,10 @@ export default function Home() {
                 className=" p-4 bg-gray-50 border border-gray-100 "
                 autoComplete="off"
                 id="cpf"
+                value={cpf}
+                onChange={(e) => {
+                  setCpf(e.target.value);
+                }}
               />
             </div>
 
@@ -269,6 +290,10 @@ export default function Home() {
                 <select
                   className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="curso"
+                  value={curso}
+                  onChange={(e) => {
+                    setCurso(e.target.value);
+                  }}
                 >
                   <option>Administração</option>
                   <option>Ciências Contábeis</option>
@@ -278,6 +303,7 @@ export default function Home() {
                   <option>Pedagogia</option>
                   <option>Administração</option>
                   <option>Direito</option>
+                  
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
