@@ -47,28 +47,28 @@ export default function Home() {
   return (
     <main>
           <div className="relative max-h-screen ">
-          <div className="h-96  w-full relative">
+          <div className=" h-96 md:h-128  w-full relative">
           <Image
                 className="   "
-                src={"/banner3.jpg"}
+                src={"/banner.png"}
                 alt="hero image example"
                 
                 priority
                 layout="fill"
                 objectFit="cover"
-                objectPosition="left"
+                objectPosition="center"
               />
               </div>
               <div className="absolute top-0 w-full flex justify-start">
               <div className="ml-20 lg:ml-20 xl:ml-52 mt-5">
-      <Image
+      {/* <Image
              
                 src={"/logo.png"}
                 alt="hero image example"
                 height={400}
                 width={400}
                 priority
-              />
+              /> */}
 </div>
 </div>
 
