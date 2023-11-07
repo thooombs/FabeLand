@@ -17,10 +17,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       email:  ${req.body.email} <br/>
       cep:  ${req.body.cep} <br/>
       logradouro:   ${req.body.log} <br/>
-      complemento:  ${req.body.comp}
+      complemento:  ${req.body.comp} <br/>
       bairro:  ${req.body.bairro} <br/>
       cidade:  ${req.body.city} <br/>
-      UF:   ${req.body.UF} <br/>
+      UF:   ${req.body.uf} <br/>
       fone:  ${req.body.fone} <br/>
       curso:  ${req.body.curso}`
     });

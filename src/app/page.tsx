@@ -48,7 +48,7 @@ export default function Home() {
   const [comp, setComp] = useState("");
   const [bairro, setBairro] = useState("");
   const [city, setCity] = useState("");
-  const [UF, setUF] = useState("");
+  const [uf, setUf] = useState("");
   const [fone, setFone] = useState("");
   const [curso, setCurso] = useState("");
 
@@ -68,7 +68,7 @@ export default function Home() {
       comp: String(event.target.comp.value),
       bairro: String(event.target.bairro.value),
       city: String(event.target.city.value),
-      UF: String(event.target.UF.value),
+      uf: String(event.target.uf.value),
       fone: String(event.target.fone.value),
       curso: String(event.target.curso.value),
     };
@@ -451,17 +451,40 @@ export default function Home() {
               <label className="font-bold text-gray-800">Estado</label>
               <div className="relative">
                 <select
-                  onChange={(e) => setUF(e.target.value)}
                   className="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="uf"
-                  value={UF}
+                  value={uf}
+                  onChange={(e) => {
+                    setUf(e.target.value);
+                  }}
                 >
-                  <option value="">Selecione um estado</option>
-                  {estadosDoBrasil.map((estado, index) => (
-                    <option key={index} value={estado}>
-                      {estado}
-                    </option>
-                  ))}
+                  <option>Acre</option>
+                  <option>Alagoas</option>
+                  <option>Amapá</option>
+                  <option>Amazonas</option>
+                  <option>Bahia</option>
+                  <option>Ceará</option>
+                  <option>Distrito Federal</option>
+                  <option>Espírito Santo</option>
+                  <option>Goiás</option>
+                  <option>Maranhão</option>
+                  <option>Mato Grosso</option>
+                  <option>Mato Grosso do Sul</option>
+                  <option>Minas Gerais</option>
+                  <option>Pará</option>
+                  <option>Paraíba</option>
+                  <option>Paraná</option>
+                  <option>Pernambuco</option>
+                  <option>Piauí</option>
+                  <option>Rio de Janeiro</option>
+                  <option>Rio Grande do Norte</option>
+                  <option>Rio Grande do Sul</option>
+                  <option>Rondônia</option>
+                  <option>Roraima</option>
+                  <option>Santa Catarina</option>
+                  <option>São Paulo</option>
+                  <option>Sergipe</option>
+                  <option>Tocantins</option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
@@ -475,7 +498,8 @@ export default function Home() {
               </div>
             </div>
 
-            
+          
+
             <div className="w-full flex flex-col my-4">
               <label className="font-bold text-gray-800" htmlFor="fone">
                 Telefone Residencial
