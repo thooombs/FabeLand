@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       sexo:  ${req.body.sexo} <br/>
       cpf:  ${req.body.cpf} <br/>
       rg:   ${req.body.rg} <br/>
-      celular:  ${req.body.cel}
+      celular:  ${req.body.cel} <br/>
       email:  ${req.body.email} <br/>
       cep:  ${req.body.cep} <br/>
       logradouro:   ${req.body.log} <br/>
