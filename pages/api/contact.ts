@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = await resend.emails.send({
       from: "FABE LP <onboarding@resend.dev>",
-      to: "thomaz639@gmail.com",
+      to: "maria.albuquerque@fabemarau.edu.br",
       subject: `${req.body.nome} - Nova Inscrição FABE`,
       html: `nome: ${req.body.nome} <br/>
       sexo:  ${req.body.sexo} <br/>
