@@ -4,13 +4,52 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+const estadosDoBrasil = [
+  "Acre",
+  "Alagoas",
+  "Amapá",
+  "Amazonas",
+  "Bahia",
+  "Ceará",
+  "Distrito Federal",
+  "Espírito Santo",
+  "Goiás",
+  "Maranhão",
+  "Mato Grosso",
+  "Mato Grosso do Sul",
+  "Minas Gerais",
+  "Pará",
+  "Paraíba",
+  "Paraná",
+  "Pernambuco",
+  "Piauí",
+  "Rio de Janeiro",
+  "Rio Grande do Norte",
+  "Rio Grande do Sul",
+  "Rondônia",
+  "Roraima",
+  "Santa Catarina",
+  "São Paulo",
+  "Sergipe",
+  "Tocantins",
+];
+
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [nome, setNome] = useState("");
-  const [fone, setFone] = useState("");
-  const [email, setEmail] = useState("");
+  const [sexo, setSexo] = useState("");
   const [cpf, setCpf] = useState("");
+  const [rg, setRg] = useState("");
+  const [cel, setCel] = useState("");
+  const [email, setEmail] = useState("");
+  const [cep, setCep] = useState("");
+  const [log, setLog] = useState("");
+  const [comp, setComp] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [city, setCity] = useState("");
+  const [UF, setUF] = useState("");
+  const [fone, setFone] = useState("");
   const [curso, setCurso] = useState("");
 
   async function handleSubmit(event: any) {
@@ -19,9 +58,18 @@ export default function Home() {
 
     const data = {
       nome: String(event.target.nome.value),
-      fone: String(event.target.fone.value),
-      email: String(event.target.email.value),
+      sexo: String(event.target.sexo.value),
       cpf: String(event.target.cpf.value),
+      rg: String(event.target.rg.value),
+      cel: String(event.target.cel.value),
+      email: String(event.target.email.value),
+      cep: String(event.target.cep.value),
+      log: String(event.target.log.value),
+      comp: String(event.target.comp.value),
+      bairro: String(event.target.bairro.value),
+      city: String(event.target.city.value),
+      UF: String(event.target.UF.value),
+      fone: String(event.target.fone.value),
       curso: String(event.target.curso.value),
     };
 
@@ -46,22 +94,21 @@ export default function Home() {
 
   return (
     <main>
-          <div className="relative max-h-screen ">
-          <div className=" h-96 md:h-128  w-full relative">
+      <div className="relative max-h-screen ">
+        <div className=" h-96 md:h-128  w-full relative">
           <Image
-                className="   "
-                src={"/banner.png"}
-                alt="hero image example"
-                
-                priority
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-              />
-              </div>
-              <div className="absolute top-0 w-full flex justify-start">
-              <div className="ml-20 lg:ml-20 xl:ml-52 mt-5">
-      {/* <Image
+            className="   "
+            src={"/banner.png"}
+            alt="hero image example"
+            priority
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+          />
+        </div>
+        <div className="absolute top-0 w-full flex justify-start">
+          <div className="ml-20 lg:ml-20 xl:ml-52 mt-5">
+            {/* <Image
              
                 src={"/logo.png"}
                 alt="hero image example"
@@ -69,20 +116,9 @@ export default function Home() {
                 width={400}
                 priority
               /> */}
-</div>
-</div>
-
-           
-
-             
-
-
-
-
-
-            </div>
-         
-       
+          </div>
+        </div>
+      </div>
 
       {/* <div className="bg-blue-700 p-2">
         <div className=" container  mx-auto  w-full">
@@ -205,11 +241,12 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-blue-300 p-2">
+      <div className="bg-white p-2">
         <div className=" container  mx-auto mb-10 w-full ">
           <div>
             <h2 className=" font-bold text-3xl my-10 ml-3">Inscreva-se</h2>
           </div>
+
           <form onSubmit={handleSubmit}>
             <div className="w-full flex flex-col my-4">
               <label className="font-bold text-gray-800" htmlFor="nome">
@@ -220,7 +257,7 @@ export default function Home() {
                 minLength={3}
                 maxLength={150}
                 required
-                className=" p-4 bg-gray-50 border border-gray-100 "
+                className=" p-4 bg-gray-50 border border-gray-900  rounded"
                 autoComplete="off"
                 id="nome"
                 value={nome}
@@ -229,21 +266,79 @@ export default function Home() {
                 }}
               />
             </div>
+
             <div className="w-full flex flex-col my-4">
-              <label className="font-bold text-gray-800" htmlFor="fone">
-                (DDD)+ Telefone/Whatsapp
+              <label className="font-bold text-gray-800" htmlFor="sexo">
+                Sexo
               </label>
               <input
                 type="text"
                 minLength={3}
                 maxLength={150}
                 required
-                className=" p-4 bg-gray-50 border border-gray-100 "
+                className=" p-4 bg-gray-50 border border-gray-900 "
                 autoComplete="off"
-                id="fone"
-                value={fone}
+                id="sexo"
+                value={sexo}
                 onChange={(e) => {
-                  setFone(e.target.value);
+                  setSexo(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800" htmlFor="cpf">
+                CPF
+              </label>
+              <input
+                type="text"
+                minLength={5}
+                maxLength={11}
+                required
+                className=" p-4 bg-gray-50 border border-gray-900 "
+                autoComplete="off"
+                id="cpf"
+                value={cpf}
+                onChange={(e) => {
+                  setCpf(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800" htmlFor="rg">
+                RG
+              </label>
+              <input
+                type="text"
+                minLength={5}
+                maxLength={11}
+                required
+                className=" p-4 bg-gray-50 border border-gray-900 "
+                autoComplete="off"
+                id="rg"
+                value={rg}
+                onChange={(e) => {
+                  setRg(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800" htmlFor="cel">
+                (DDD)+ Celular/Whatsapp
+              </label>
+              <input
+                type="text"
+                minLength={3}
+                maxLength={150}
+                required
+                className=" p-4 bg-gray-50 border border-gray-900 "
+                autoComplete="off"
+                id="cel"
+                value={cel}
+                onChange={(e) => {
+                  setCel(e.target.value);
                 }}
               />
             </div>
@@ -256,7 +351,7 @@ export default function Home() {
                 minLength={5}
                 maxLength={150}
                 required
-                className=" p-4 bg-gray-50 border border-gray-100 "
+                className=" p-4 bg-gray-50 border border-gray-900 "
                 autoComplete="off"
                 id="email"
                 value={email}
@@ -266,20 +361,135 @@ export default function Home() {
               />
             </div>
             <div className="w-full flex flex-col my-4">
-              <label className="font-bold text-gray-800" htmlFor="cpf">
-                CPF
+              <label className="font-bold text-gray-800" htmlFor="cep">
+                CEP
               </label>
               <input
-                type="text"
                 minLength={5}
-                maxLength={11}
+                maxLength={150}
                 required
-                className=" p-4 bg-gray-50 border border-gray-100 "
+                className=" p-4 bg-gray-50 border border-gray-900 "
                 autoComplete="off"
-                id="cpf"
-                value={cpf}
+                id="cep"
+                value={cep}
                 onChange={(e) => {
-                  setCpf(e.target.value);
+                  setCep(e.target.value);
+                }}
+              />
+            </div>
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800" htmlFor="log">
+                Logradouro
+              </label>
+              <input
+                minLength={5}
+                maxLength={150}
+                required
+                className=" p-4 bg-gray-50 border border-gray-900 "
+                autoComplete="off"
+                id="log"
+                value={log}
+                onChange={(e) => {
+                  setLog(e.target.value);
+                }}
+              />
+            </div>
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800" htmlFor="comp">
+                Complemento
+              </label>
+              <input
+                minLength={5}
+                maxLength={150}
+                required
+                className=" p-4 bg-gray-50 border border-gray-900 "
+                autoComplete="off"
+                id="comp"
+                value={comp}
+                onChange={(e) => {
+                  setComp(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800" htmlFor="bairro">
+                Bairro
+              </label>
+              <input
+                minLength={5}
+                maxLength={150}
+                required
+                className=" p-4 bg-gray-50 border border-gray-900 "
+                autoComplete="off"
+                id="bairro"
+                value={bairro}
+                onChange={(e) => {
+                  setBairro(e.target.value);
+                }}
+              />
+            </div>
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800" htmlFor="city">
+                Cidade
+              </label>
+              <input
+                minLength={5}
+                maxLength={150}
+                required
+                className=" p-4 bg-gray-50 border border-gray-900 "
+                autoComplete="off"
+                id="city"
+                value={city}
+                onChange={(e) => {
+                  setCity(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800">Estado</label>
+              <div className="relative">
+                <select
+                  onChange={(e) => setUF(e.target.value)}
+                  className="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="uf"
+                  value={UF}
+                >
+                  <option value="">Selecione um estado</option>
+                  {estadosDoBrasil.map((estado, index) => (
+                    <option key={index} value={estado}>
+                      {estado}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    className="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            
+            <div className="w-full flex flex-col my-4">
+              <label className="font-bold text-gray-800" htmlFor="fone">
+                Telefone Residencial
+              </label>
+              <input
+                minLength={5}
+                maxLength={150}
+                required
+                className=" p-4 bg-gray-50 border border-gray-900 "
+                autoComplete="off"
+                id="fone"
+                value={fone}
+                onChange={(e) => {
+                  setFone(e.target.value);
                 }}
               />
             </div>
@@ -288,7 +498,7 @@ export default function Home() {
               <label className="font-bold text-gray-800">Curso</label>
               <div className="relative">
                 <select
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="curso"
                   value={curso}
                   onChange={(e) => {
@@ -303,7 +513,6 @@ export default function Home() {
                   <option>Pedagogia</option>
                   <option>Administração</option>
                   <option>Direito</option>
-                  
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg

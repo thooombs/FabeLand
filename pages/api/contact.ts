@@ -10,10 +10,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       to: "thomaz639@gmail.com",
       subject: `${req.body.nome} - Nova Inscrição FABE`,
       html: `nome: ${req.body.nome} <br/>
-      fone:  ${req.body.fone} <br/>
+      sexo:  ${req.body.sexo} <br/>
+      cpf:  ${req.body.cpf} <br/>
+      rg:   ${req.body.rg} <br/>
+      celular:  ${req.body.cel}
       email:  ${req.body.email} <br/>
-      cpf:   ${req.body.cpf} <br/>
-      curso:  ${req.body.curso}`,
+      cep:  ${req.body.cep} <br/>
+      logradouro:   ${req.body.log} <br/>
+      complemento:  ${req.body.comp}
+      bairro:  ${req.body.bairro} <br/>
+      cidade:  ${req.body.city} <br/>
+      UF:   ${req.body.UF} <br/>
+      fone:  ${req.body.fone} <br/>
+      curso:  ${req.body.curso}`
     });
 
     res.status(200).json(data);
