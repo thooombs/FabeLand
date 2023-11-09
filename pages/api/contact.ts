@@ -7,21 +7,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = await resend.emails.send({
       from: "FABE LP <onboarding@resend.dev>",
-      to: "thomaz639@gmail.com",
+      to: "maria.albuquerque@fabemarau.edu.br",
       subject: `${req.body.nome} - Nova Inscrição FABE`,
       html: `nome: ${req.body.nome} <br/>
-      sexo:  ${req.body.sexo} <br/>
+      
       cpf:  ${req.body.cpf} <br/>
-      rg:   ${req.body.rg} <br/>
+      
       celular:  ${req.body.cel} <br/>
       email:  ${req.body.email} <br/>
-      cep:  ${req.body.cep} <br/>
-      logradouro:   ${req.body.log} <br/>
-      complemento:  ${req.body.comp} <br/>
-      bairro:  ${req.body.bairro} <br/>
+      
       cidade:  ${req.body.city} <br/>
-      UF:   ${req.body.uf} <br/>
-      fone:  ${req.body.fone} <br/>
+     
       curso:  ${req.body.curso}`
     });
 
