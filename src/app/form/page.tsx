@@ -39,20 +39,11 @@ export default function Form() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [nome, setNome] = useState("");
-  const [sexo, setSexo] = useState("");
   const [cpf, setCpf] = useState("");
-  const [rg, setRg] = useState("");
   const [cel, setCel] = useState("");
   const [email, setEmail] = useState("");
-  const [cep, setCep] = useState("");
-  const [log, setLog] = useState("");
-  const [comp, setComp] = useState("");
-  const [bairro, setBairro] = useState("");
   const [city, setCity] = useState("");
-  const [uf, setUf] = useState("");
-  const [fone, setFone] = useState("");
   const [curso, setCurso] = useState("");
-  const [isSmall, setisSmall] = useState(true)
 
 
   async function handleSubmit(event: any) {
@@ -60,23 +51,15 @@ export default function Form() {
     setLoading(true);
 
     const data = {
-      nome: String(event.target.nome.value),
-      sexo: String(event.target.sexo.value),
+      nome: String(event.target.nome.value),     
       cpf: String(event.target.cpf.value),
-      rg: String(event.target.rg.value),
       cel: String(event.target.cel.value),
       email: String(event.target.email.value),
-      cep: String(event.target.cep.value),
-      log: String(event.target.log.value),
-      comp: String(event.target.comp.value),
-      bairro: String(event.target.bairro.value),
-      city: String(event.target.city.value),
-      uf: String(event.target.uf.value),
-      fone: String(event.target.fone.value),
+      city: String(event.target.city.value),    
       curso: String(event.target.curso.value),
     };
 
-    const response = await fetch("/api/contact", {
+    const response = await fetch("../api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -200,7 +183,7 @@ export default function Form() {
             
             <div className="w-full flex flex-col my-4">
               <label className="font-bold text-gray-800" htmlFor="city">
-                Cidade
+                Endereço Completo
               </label>
               <input
                 minLength={5}
