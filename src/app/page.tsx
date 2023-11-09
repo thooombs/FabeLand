@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { unstable_getImgProps as getImgProps } from "next/image";
 
 const estadosDoBrasil = [
   "Acre",
@@ -51,6 +52,15 @@ export default function Home() {
   const [uf, setUf] = useState("");
   const [fone, setFone] = useState("");
   const [curso, setCurso] = useState("");
+  const [isSmall, setisSmall] = useState(true);
+
+  const common = { alt: "Hero", width: 800, height: 400 };
+  const {
+    props: { srcSet: dark },
+  } = getImgProps({ ...common, src: "/dark.png" });
+  const {
+    props: { srcSet: light, ...rest },
+  } = getImgProps({ ...common, src: "/light.png" });
 
   async function handleSubmit(event: any) {
     event.preventDefault();
@@ -95,9 +105,9 @@ export default function Home() {
   return (
     <main>
       <div className="relative max-h-screen ">
-        <div className=" h-96 md:h-128  w-full relative">
+        <div className={`h-96 md:h-128 w-full relative  `}>
           <Image
-            className="   "
+            className=" "
             src={"/banner.png"}
             alt="hero image example"
             priority
@@ -120,67 +130,30 @@ export default function Home() {
         </div>
       </div>
 
-      {/* <div className="bg-blue-700 p-2">
+
+      <div className="bg-blue-500 ">
         <div className=" container  mx-auto  w-full">
-          <div className="flex flex-col md:place-items-center  md:justify-between  md:flex-row gap-9 m-10 ">
-            <Link  href="http://fabemarau.edu.br/graduacao/" passHref={true} className="order-first text-white font-bold text-3xl" >
-              <h1>Graduação</h1>
-            </Link>
-
-            <Link href="http://www.fabemarau.edu.br/pos-graduacao/" passHref={true} className="order-2 text-white font-bold text-3xl">
-              <h3>Pós Graduação/MBA</h3>
-            </Link>
-
-            <Link href="http://www.fabemarau.edu.br/cursos-de-extensao/" passHref={true} className="order-3 text-white font-bold text-3xl">
-              <h2>Extensão</h2>
-            </Link>
-          </div>
-        </div>
-      </div> */}
-      <div className="bg-blue-700 p-2">
-        <div className=" container  mx-auto  w-full">
-          <div className="flex flex-col md:place-items-center  md:justify-between  md:flex-row gap-9 m-10 ">
+          <div className="  place-items-center gap-6 p-10 flex flex-col md:place-items-center  md:justify-between  md:flex-row ">
             <Link
-              href="http://fabemarau.edu.br/vestibular/"
-              passHref={true}
-              className="order-first text-white font-bold text-3xl"
-            >
-              <h1>Transferência</h1>
-            </Link>
-
-            <Link
-              href="http://www.fabemarau.edu.br/vestibular/"
-              passHref={true}
-              className="order-2 text-white font-bold text-3xl"
-            >
-              <h3>Nota do Enem</h3>
-            </Link>
-
-            <Link
-              href="http://www.fabemarau.edu.br/vestibular/"
-              passHref={true}
-              className="order-3 text-white font-bold text-3xl"
-            >
-              <h2>2ª Graduação</h2>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-blue-500 p-2">
-        <div className=" container  mx-auto  w-full">
-          <div className="  text-center    gap-9 m-10 ">
-            <Link
-              href="http://fabemarau.edu.br/vestibular-redacao/"
+              href="/form"
               passHref={true}
               className=" text-white font-bold text-3xl"
             >
-              <h1>Envie sua Redação Online</h1>
+              <h1>Inscrições</h1>
             </Link>
+
+            <div className="   ">
+              <Link
+                href="http://fabemarau.edu.br/vestibular-redacao/"
+                passHref={true}
+                className="  text-white font-bold text-3xl"
+              >
+                <h1>Envie sua Redação Online</h1>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-
       <div className="bg-blue-900 p-2">
         <div className=" container  mx-auto  w-full">
           <div className="flex flex-col   md:justify-between   gap-9 m-10 ">
@@ -241,7 +214,38 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-white p-2">
+
+      <div className="bg-blue-700 p-2">
+        <div className=" container  mx-auto  w-full">
+          <div className="flex flex-col md:place-items-center  md:justify-between  md:flex-row gap-9 m-10 ">
+            <Link
+              href="http://fabemarau.edu.br/vestibular/"
+              passHref={true}
+              className="order-first text-white font-bold text-3xl"
+            >
+              <h1>Transferência</h1>
+            </Link>
+
+            <Link
+              href="http://www.fabemarau.edu.br/vestibular/"
+              passHref={true}
+              className="order-2 text-white font-bold text-3xl"
+            >
+              <h3>Nota do Enem</h3>
+            </Link>
+
+            <Link
+              href="http://www.fabemarau.edu.br/vestibular/"
+              passHref={true}
+              className="order-3 text-white font-bold text-3xl"
+            >
+              <h2>2ª Graduação</h2>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="bg-white p-2">
         <div className=" container  mx-auto mb-10 w-full ">
           <div>
             <h2 className=" font-bold text-3xl my-10 ml-3">Inscreva-se</h2>
@@ -559,7 +563,7 @@ export default function Home() {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
       <div>
         <footer className="bg-white">
           <div className="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8">
