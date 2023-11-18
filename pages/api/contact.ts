@@ -1,23 +1,39 @@
 import { NextApiRequest, NextApiResponse } from "next";
-const mailchimp = require('@mailchimp/mailchimp_transactional')('f3b601808a1bacef67f6f5892925474b');
+import AWS from "aws-sdk";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const message = {
-    from_email: "saga@sagapc.com.br",
-    subject: "hello world",
-    to: [
-      {
-        email: "thomaz639@gmail.com",
-        type: "to",
+  const SES_REGION = 'us-east-1';
+  const SES_ACCESS_KEY_ID = process.env.SES_ACCESS_KEY_ID;
+  const SES_SECRET_ACCESS_KEY = process.env.SES_SECRET_ACCESS_KEY;
+
+  const ses = new AWS.SES({
+    region: SES_REGION,
+    accessKeyId: SES_ACCESS_KEY_ID,
+    secretAccessKey: SES_SECRET_ACCESS_KEY,
+  });
+
+
+    
+  const params = {
+    Source: "Saga <saga@sagapc.com.br>",
+    Destination: {
+      ToAddresses: ["thomaz639@gmail.com"],
+    },
+    Message: {
+      Subject: {
+        Data: "hello world",
       },
-    ],
-    html: "<strong>it works!</strong>",
+      Body: {
+        Html: {
+          Data: "<strong>it works!</strong>",
+        },
+      },
+    },
   };
 
   try {
-    const response = await mailchimp.messages.send({ message });
-    console.log(response);
-    res.status(200).json(response);
+    const data = await ses.sendEmail(params).promise();
+    res.status(200).json(data);
   } catch (error) {
     console.error("Error sending email:", error);
     res.status(500).json({ error: "Error sending email" });
