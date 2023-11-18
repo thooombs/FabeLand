@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const params = {
     Source: "Saga <saga@sagapc.com.br>",
     Destination: {
-      ToAddresses: ["thomaz639@gmail.com"],
+      ToAddresses: ["marafigoduda@gmail.com"],
     },
     Message: {
       Subject: {
