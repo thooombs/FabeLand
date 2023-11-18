@@ -1,30 +1,31 @@
-// pages/api/sendMailchimpEmail.js
-
-import { NextApiRequest, NextApiResponse } from 'next';
-const mailchimp = require('@mailchimp/mailchimp_transactional')('YOUR_MAILCHIMP_API_KEY');
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
-  }
+import { Resend } from "resend";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { EmailTemplate } from "@/app/components/email-template";
 
 
-  try {
-    const response = await mailchimp.messages.send({
-      message: {
-        from_email: 'saga@sagapc.com.br',
-        subject: 'hello world',
-        to: 'thomaz639@gmail.com',
-        html: '<strong>it works!</strong>',
-      },
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  try { 
+    const data = await resend.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      to: "maronibruuna@gmail.com",
+      subject: `${req.body.nome} - Nova Inscrição FABE`,
+      html: `nome: ${req.body.nome} <br/>
+      
+      cpf:  ${req.body.cpf} <br/>
+      
+      celular:  ${req.body.cel} <br/>
+      email:  ${req.body.email} <br/>
+      
+      cidade:  ${req.body.city} <br/>
+     
+      curso:  ${req.body.curso}`
     });
 
-
-    
-
-    res.status(response.status).json({ success: true, response: response.data });
+    res.status(200).json(data);
   } catch (error) {
-    console.error('Mailchimp API Error:');
-    res.status(500).json({ success: false, error: 'Failed to send email' });
+    res.status(400).json(error);
   }
-}
+};
