@@ -3,9 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { EmailTemplate } from "@/app/components/email-template";
 
 
-const resend = new Resend("re_5hqut7DW_Myci3pCv4hFBSXqUvnGxkx3M");
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
+  try { 
     const data = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: "maronibruuna@gmail.com",
