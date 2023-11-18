@@ -1,31 +1,39 @@
-import { Resend } from "resend";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { EmailTemplate } from "@/app/components/email-template";
+import { NextApiRequest, NextApiResponse } from "next";
+import AWS from "aws-sdk";
 
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const SES_REGION = 'us-east-1';
+  const SES_ACCESS_KEY_ID = process.env.SES_ACCESS_KEY_ID;
+  const SES_SECRET_ACCESS_KEY = process.env.SES_SECRET_ACCESS_KEY;
 
+  const ses = new AWS.SES({
+    region: SES_REGION,
+    accessKeyId: SES_ACCESS_KEY_ID,
+    secretAccessKey: SES_SECRET_ACCESS_KEY,
+  });
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+  const params = {
+    Source: "Saga <saga@sagapc.com.br>",
+    Destination: {
+      ToAddresses: ["thomaz639@gmail.com"],
+    },
+    Message: {
+      Subject: {
+        Data: "hello world",
+      },
+      Body: {
+        Html: {
+          Data: "<strong>it works!</strong>",
+        },
+      },
+    },
+  };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  try { 
-    const data = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: "maronibruuna@gmail.com",
-      subject: `${req.body.nome} - Nova Inscrição FABE`,
-      html: `nome: ${req.body.nome} <br/>
-      
-      cpf:  ${req.body.cpf} <br/>
-      
-      celular:  ${req.body.cel} <br/>
-      email:  ${req.body.email} <br/>
-      
-      cidade:  ${req.body.city} <br/>
-     
-      curso:  ${req.body.curso}`
-    });
-
+  try {
+    const data = await ses.sendEmail(params).promise();
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).json(error);
+    console.error("Error sending email:", error);
+    res.status(500).json({ error: "Error sending email" });
   }
-};
+}
